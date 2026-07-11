@@ -7,18 +7,18 @@ abstract class PaymentProcessor {
     try {
       final paymentMethod = createPaymentMethod();
       paymentMethod.pay(amount);
-      saveTransaction();
-      sendReceipt();
+      _saveTransaction();
+      _sendReceipt();
     } on Exception catch (e) {
       print(e.toString());
     }
   }
 
-  void saveTransaction() {
+  void _saveTransaction() {
     print('Transactions is saved');
   }
 
-  void sendReceipt() {
+  void _sendReceipt() {
     print('Receipt is sent');
   }
 }
