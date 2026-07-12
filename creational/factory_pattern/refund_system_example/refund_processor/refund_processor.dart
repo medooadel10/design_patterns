@@ -1,3 +1,4 @@
+import '../../notification_example/notification_factory.dart';
 import '../entities/refund_request.dart';
 import '../refund_payment_method/bank_refund_method.dart';
 import '../refund_payment_method/credit_card_refund_method.dart';
@@ -10,6 +11,7 @@ abstract class RefundProcessor {
   RefundProcessor(this.refundRequest);
 
   RefundPaymentMethod createRefund();
+  NotificationFactory createNotification();
 
   void processRefund() {
     if (_validate()) {
@@ -18,7 +20,7 @@ abstract class RefundProcessor {
       if (refunded) {
         refundRequest.refundRequestNumber = 'REF12434';
         refundRequest.refundStatus = RefundStatus.Completed;
-        refundPaymentMethod.sendNotification();
+        createNotification().sendNotification();
       } else {
         refundRequest.refundStatus = RefundStatus.Failed;
       }
@@ -58,6 +60,14 @@ class CreditCardRefundProcessor extends RefundProcessor {
   RefundPaymentMethod createRefund() {
     return CreditCardRefundMethod(refundRequest);
   }
+
+  @override
+  NotificationFactory createNotification() {
+    return SMSNotificationFactory(
+      receiver: refundRequest.order.customer.name,
+      msg: 'Refund has been completed by credit',
+    );
+  }
 }
 
 class BankRefundProcessor extends RefundProcessor {
@@ -67,6 +77,14 @@ class BankRefundProcessor extends RefundProcessor {
   RefundPaymentMethod createRefund() {
     return BankRefundMethod(refundRequest);
   }
+
+  @override
+  NotificationFactory createNotification() {
+    return SMSNotificationFactory(
+      receiver: refundRequest.order.customer.name,
+      msg: 'Refund has been completed by bank',
+    );
+  }
 }
 
 class WalletRefundProcessor extends RefundProcessor {
@@ -75,5 +93,13 @@ class WalletRefundProcessor extends RefundProcessor {
   @override
   RefundPaymentMethod createRefund() {
     return WalletRefundMethod(refundRequest);
+  }
+
+  @override
+  NotificationFactory createNotification() {
+    return SMSNotificationFactory(
+      receiver: refundRequest.order.customer.name,
+      msg: 'Refund has been completed by wallet',
+    );
   }
 }

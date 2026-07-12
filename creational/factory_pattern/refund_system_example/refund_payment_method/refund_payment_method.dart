@@ -8,6 +8,4 @@ abstract class RefundPaymentMethod {
   bool validate();
 
   bool refund();
-
-  void sendNotification();
 }
