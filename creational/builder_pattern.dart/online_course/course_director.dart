@@ -1,4 +1,4 @@
-import 'builder/course_builder.dart';
+import 'builder/base_course_builder.dart';
 import 'course/assignment.dart';
 import 'course/certificate.dart';
 import 'course/course.dart';
@@ -9,7 +9,7 @@ import 'course/quiz.dart';
 import 'course/recorded_lesson.dart';
 
 class CourseDirector {
-  CourseBuilder builder;
+  BaseCourseBuilder builder;
 
   CourseDirector(this.builder);
 
@@ -32,7 +32,7 @@ class CourseDirector {
         .addRecordedSessions(recordedSessions)
         .addDownloadableResources(downloadableResources)
         .configureCertificate(certificate)
-        .setPriceAndDiscount(10000, 10)
+        .setPriceAndDiscount(20000, 10)
         .build();
   }
 
@@ -62,7 +62,7 @@ class CourseDirector {
         .build();
   }
 
-  void changeBuilder(CourseBuilder builder) {
+  void changeBuilder(BaseCourseBuilder builder) {
     this.builder = builder;
   }
 }

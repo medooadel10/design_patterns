@@ -1,5 +1,6 @@
 import 'assignment.dart';
 import 'certificate.dart';
+import 'downloadable_resource.dart';
 import 'instructor.dart';
 import 'live_session.dart';
 import 'quiz.dart';
@@ -12,6 +13,7 @@ class Course {
   final DifficultyLevel diffcultyLevel;
   final List<RecordedLesson> recordedLessons;
   final List<LiveSession>? liveSessions;
+  final List<DownloadableResource>? downloadableResources;
   final Instructor instructor;
   final List<Quiz>? quizzes;
   final List<Assignment>? assignments;
@@ -34,11 +36,12 @@ class Course {
     this.maxNoOfStudent,
     this.quizzes,
     this.certificate,
+    this.downloadableResources,
   });
 
   @override
   String toString() {
-    return 'Title is $title, description is $description, course duration is $courseDuration, difficulty level is $diffcultyLevel, recorded lessons are $recordedLessons, live sessions are $liveSessions, instructor is $instructor, quizzes are $quizzes, assignments are $assignments, certificate is $certificate, course price is $coursePrice, discount is $discount, max no of student is $maxNoOfStudent';
+    return 'Title is $title, description is $description, course duration is $courseDuration, difficulty level is $diffcultyLevel, recorded lessons are $recordedLessons, live sessions are $liveSessions, downloadable resources are $downloadableResources, instructor is $instructor, quizzes are $quizzes, assignments are $assignments, certificate is $certificate, course price is $coursePrice, discount is $discount, max no of student is $maxNoOfStudent';
   }
 }
 
